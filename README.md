@@ -4,6 +4,14 @@ RealEstateHub is a modern full-stack web application built with the MERN stack �
 It enables users to browse, list, and manage real estate properties with secure user-based login & authentication, responsive UI, and efficient data handling.
 The platform supports image uploads, smooth client–server communication, and a scalable architecture for handling real-world real estate management needs.
 
+## 🔑 Backend Key Features
+- **User-based Login & Authentication** – Secure user registration and login using JWT (JSON Web Token) and password hashing.
+- **Property Management API** – Create, read, update, and delete property listings in MongoDB.
+- **File Upload Handling** – Upload and store property images using Multer.
+- **Database Integration** – MongoDB with Mongoose for schema-based modeling.
+- **CORS Enabled** – Secure cross-origin API communication with the frontend.
+- **RESTful API Architecture** – Clean, scalable, and maintainable API design.
+- **Error Handling Middleware** – Centralized error handling for better debugging.
 
 ---
 ## 🛠 Tech Stack
