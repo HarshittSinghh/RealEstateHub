@@ -5,8 +5,8 @@ It enables users to browse, list, and manage real estate properties with secure 
 The platform supports image uploads, smooth client–server communication, and a scalable architecture for handling real-world real estate management needs.
 
 ## 🔑 Backend Key Features
-- **User-based Login & Authentication** – Secure user registration and login using JWT (JSON Web Token) and password hashing.
-- **Property Management API** – Create, read, update, and delete property listings in MongoDB.
+- **User-based Login & Authentication** – Secure login system with role-based access control (Admin: `admin@gmail.com` / `admin123`, Customer: `customer@gmail.com` / `customer123`).
+- **Property Management API** – Create, read and delete property listings in MongoDB.
 - **File Upload Handling** – Upload and store property images using Multer.
 - **Database Integration** – MongoDB with Mongoose for schema-based modeling.
 - **CORS Enabled** – Secure cross-origin API communication with the frontend.
