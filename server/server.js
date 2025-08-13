@@ -4,6 +4,7 @@ const cors = require("cors");
 const path = require("path");
 const multer = require("multer");
 const fs = require("fs");
+const session = require("express-session");
 
 const app = express();
 app.use(cors());
@@ -22,6 +23,19 @@ const users = [
     password: "customer123",
   },
 ];
+
+// app.use(
+//   session({
+//     secret: "realestatehub_secret_key",
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: {
+//       httpOnly: true,
+//       maxAge: 1000 * 60 * 60,
+//       sameSite: "lax",
+//     },
+//   })
+// );
 
 app.post("/api/login", (req, res) => {
   const { email, password, role } = req.body;
@@ -140,27 +154,24 @@ app.get("/getAllProperties", async (req, res) => {
   }
 });
 
-
-app.put("/updateProperty/:id", async (req, res) => {
+app.delete("/deleteProperty/:id", async (req, res) => {
   try {
-    const updated = await Property.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
-    res.send(updated);
-  } catch (err) {
-    console.error("Update error:", err);
-    res.status(500).send("Failed to update property");
-  }
-});
+    const property = await Property.findById(req.params.id);
+    if (!property)
+      return res.status(404).json({ message: "Property not found" });
 
-app.post("/deleteProperty", async (req, res) => {
-  try {
-    const { id } = req.body;
-    await Property.findByIdAndDelete(id);
-    res.status(200).send({ message: "Property deleted successfully" });
+    if (property.image) {
+      const imgPath = path.join(__dirname, "public", property.image);
+      if (fs.existsSync(imgPath)) {
+        fs.unlinkSync(imgPath);
+      }
+    }
+
+    await Property.findByIdAndDelete(req.params.id);
+    res.status(200).json({ message: "Property deleted successfully" });
   } catch (error) {
     console.error("Delete error:", error);
-    res.status(500).send({ message: "Failed to delete property" });
+    res.status(500).json({ message: "Failed to delete property" });
   }
 });
 
